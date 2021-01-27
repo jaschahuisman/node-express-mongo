@@ -9,7 +9,7 @@ startApp(4040);
 /**
  * ROUTE SAMPLE CODE
  */
-app.get('/', async (req, res) => {
+app.get('/', (req, res) => {
 	const title = req.body['title'];
 	const description = req.body['description'];
 
@@ -19,10 +19,12 @@ app.get('/', async (req, res) => {
 		return res.status(404).send('Please enter title');
 	}
 
-	const { client, db } = await database();
-	db.collection('yeet').insertOne(item, (error, result) => {
-        // do error handling here
-		res.send(result);
-		client.close();
+	database().then((value) => {
+		const { db, client } = value;
+		db.collection('yeet').insertOne(item, (error, result) => {
+			// do error handling here
+			res.send(result);
+			client.close();
+		});
 	});
 });
