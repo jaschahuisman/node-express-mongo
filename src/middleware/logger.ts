@@ -1,5 +1,13 @@
 import express from 'express';
 
+/**
+ * ### Logger
+ * In testing environment the logger function will  
+ * log data about the request and response.
+ * @param req 
+ * @param res 
+ * @param next 
+ */
 const logger = (
 	req: express.Request,
 	res: express.Response,
